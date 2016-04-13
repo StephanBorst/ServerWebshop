@@ -17,9 +17,9 @@ public class SimpleController {
 
 	
 	
-	@RequestMapping("/bestelling")
+	@RequestMapping("/bestel")
 	public String simple1(Model model) {
-		return "bestelling";
+		return "bestel";
 	}
 	
 	@ModelAttribute("Bestelling")
@@ -28,7 +28,7 @@ public class SimpleController {
 	}
 	
 
-	@RequestMapping(value="/bestelling", method=RequestMethod.POST)
+	@RequestMapping(value="/bestel", method=RequestMethod.POST)
 	public String nieuweBestelling(String name, int age, @Valid Bestelling bestelling, BindingResult result, Model model) {
 	String message;
 	if (result.hasErrors()){
@@ -39,7 +39,7 @@ public class SimpleController {
 	message = "Form submitted successfully";
 	model.addAttribute("message", message);
 	DataAccesObject.create(name, age);
-	return "redirect:/bestelling";
+	return "redirect:/bestel";
 	}
 
 	@RequestMapping("/overzicht")
