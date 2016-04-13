@@ -3,7 +3,6 @@ package nl.zwolle.mvc;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -13,11 +12,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Bestelling {
 
 	
-	@NotEmpty
+	@NotEmpty(message="This field cannot be empty")
 	private String name;
 		
 	@Min(21)
-	@Max(130)
 	private int age;
 
 

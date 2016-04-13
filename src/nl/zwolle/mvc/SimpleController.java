@@ -1,7 +1,10 @@
 package nl.zwolle.mvc;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +19,7 @@ public class SimpleController {
 	
 	@RequestMapping("/bestelling")
 	public String simple1(Model model) {
-		return "Bestelling";
+		return "bestelling";
 	}
 	
 	@ModelAttribute("Bestelling")
@@ -26,7 +29,15 @@ public class SimpleController {
 	
 
 	@RequestMapping(value="/bestelling", method=RequestMethod.POST)
-	public String nieuweBestelling(String name, int age) {
+	public String nieuweBestelling(String name, int age, @Valid Bestelling bestelling, BindingResult result, Model model) {
+	String message;
+	if (result.hasErrors()){
+		message="Form contains errors";
+		model.addAttribute("message", message);
+	return null;
+	}
+	message = "Form submitted successfully";
+	model.addAttribute("message", message);
 	DataAccesObject.create(name, age);
 	return "redirect:/bestelling";
 	}
