@@ -1,4 +1,4 @@
-package nl.zwolle.mvc;
+package webshop.main;
 
 import java.util.List;
 

@@ -1,14 +1,11 @@
-package nl.zwolle.mvc;
+package webshop.main;
 
-import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
@@ -17,19 +14,13 @@ public class SimpleController {
 
 	
 	@RequestMapping("/")
-	public String home(Model model) {
+	public String home() {
 		return "home";
 	}
 	
 	@RequestMapping("/overview")
-	public String overview(Model model) {
+	public String overview() {
 		return "overzicht";
-	}
-	
-	
-	@RequestMapping("/order")
-	public String bestel(Model model) {
-		return "bestel";
 	}
 	
 	@ModelAttribute("Bestelling")
@@ -37,19 +28,6 @@ public class SimpleController {
 		return new Bestelling();
 	}
 	
-	@RequestMapping(value="/bestel", method=RequestMethod.POST)
-	public String nieuweBestelling(String name, int age, @Valid Bestelling bestelling, BindingResult result, Model model) {
-	String message;
-	if (result.hasErrors()){
-	return null;
-	}
-	
-	message = "Form submitted successfully";
-	model.addAttribute("message", message);
-	DataAccesObject.create(name, age);
-	return "redirect:/bestel";
-	}
-
 	
 	@RequestMapping("/overzicht")
 	public String overzicht(Model model) {

@@ -1,4 +1,4 @@
-package nl.zwolle.mvc;
+package webshop.main;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
