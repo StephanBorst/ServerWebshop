@@ -17,9 +17,11 @@ public class Bestelling {
 	@Min(21)
 	private int age;
 
-
+	private String destination;
+	
 	private Long id;
 
+	
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
@@ -47,10 +49,17 @@ public class Bestelling {
 		this.age = age;
 	}
 
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
 
 	@Override
 	public String toString() {
-		return id + ": [name=" + name + ", age=" + age + "]";
+		return id + ": [name= " + name + ", age= " + age + ", destination= " + destination +"]";
 	}
 	
 

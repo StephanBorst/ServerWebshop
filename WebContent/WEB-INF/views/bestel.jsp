@@ -40,6 +40,11 @@
 		 		</form:label>
 		  		<form:input path="age" />
 		  		
+		  		<form:select path= "destination">
+				<form:option value = "rivendel">Rivendel</form:option>
+				<form:option value = "coruscant">Coruscant</form:option>
+			
+				</form:select>
 		  		</fieldset>
 	
 			<p><button type="submit">Submit</button></p>

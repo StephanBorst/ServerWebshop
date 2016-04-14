@@ -14,27 +14,22 @@ public class SimpleController {
 
 	
 	@RequestMapping("/")
-	public String home() {
+	public String home(Model model) {
 		return "home";
 	}
 	
-	@RequestMapping("/overview")
-	public String overview() {
-		return "overzicht";
-	}
-	
+
 	@ModelAttribute("Bestelling")
 	public Bestelling createFormBean() {
 		return new Bestelling();
 	}
 	
 	
-	@RequestMapping("/overzicht")
+	@RequestMapping("/overview")
 	public String overzicht(Model model) {
-		model.addAttribute("JavaBeans", DataAccesObject.all());
+		model.addAttribute("Bestellingen", DataAccesObject.all());
 		return "overzicht";
 	}
-
 	
 	
 	@RequestMapping(value="/bestelling/{id}")
@@ -56,6 +51,21 @@ public class SimpleController {
 			return "detail";
 		}
 	}
+	
+	@RequestMapping(value="/delete/{id}")
+	public String deleteView(@PathVariable String id){
+		Long key;
+		try{
+			key = Long.valueOf(id);
+		}
+		catch(NumberFormatException e){
+		return null;
+		}
+
+		DataAccesObject.remove(key);
+		return "redirect:/overview";
+	}
+	
 	
 	
 }

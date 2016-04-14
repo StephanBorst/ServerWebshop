@@ -20,17 +20,18 @@
 		<p> Here is an overview of your orders you can inspect and remove them.
 		
 		<img src="resources\Fleet.jpg">
-		</article>
+		
 	<ul>
 		<c:forEach items="${Bestellingen}" var="Bestelling">
 			<li>
-				Bestelling ${Bestelling.id}: <a href="<c:url value="/bestelling/${Bestelling.id}" />"></a>, 
-				<a href="<c:url value="/delete/${Bestelling.id}" />">verwijder</a>
+				Bestelling ${Bestelling.id}: <a href="<c:url value="/bestelling/${Bestelling.id}" />">Show Details</a>, 
+				<a href="<c:url value="/delete/${Bestelling.id}" />">Remove</a>
 			</li>
 		</c:forEach>
 	</ul>
-	<a class="button" href="http://localhost:8080/webshop" >Back to Home</a>
 	
+	<a class="button" href="http://localhost:8080/webshop" >Back to Home</a>
+	</article>
 	
 </body>
 </html>

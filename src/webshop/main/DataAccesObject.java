@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 
-
 public abstract class DataAccesObject {
 
 private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop");
@@ -67,7 +66,7 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
-		List<Bestelling> beans = em.createQuery("from JavaBean", Bestelling.class).getResultList();
+		List<Bestelling> beans = em.createQuery("from Bestelling", Bestelling.class).getResultList();
 		t.commit();
 		em.close();
 		return beans;
