@@ -11,13 +11,10 @@
 </head>
 <body>
 
-	<h2>Bestelling Pagina</h2>
-	Hallo bedankt voor uw interesse in ons product! Graag dit formulier
-	volledig invullen.
+	<h2>Order Page</h2>
+	Please fill in the complete form to complete your order
 	<br>
 	<div id="formsContent">
-		<h2>Forms</h2>
-		
 		<form:form id="form" method="post" modelAttribute="Bestelling" cssClass="cleanform">
 			<div class="header">
 		  		<h2>Form</h2>

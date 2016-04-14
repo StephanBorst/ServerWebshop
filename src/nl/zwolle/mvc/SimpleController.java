@@ -16,9 +16,19 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 public class SimpleController {
 
 	
+	@RequestMapping("/")
+	public String home(Model model) {
+		return "home";
+	}
 	
-	@RequestMapping("/bestel")
-	public String simple1(Model model) {
+	@RequestMapping("/overview")
+	public String overview(Model model) {
+		return "overzicht";
+	}
+	
+	
+	@RequestMapping("/order")
+	public String bestel(Model model) {
 		return "bestel";
 	}
 	
