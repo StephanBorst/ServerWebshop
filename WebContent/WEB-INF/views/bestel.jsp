@@ -4,7 +4,7 @@
 <%@ page session="false"%>
 <html>
 <head>
-<title>forms | mvc-showcase</title>
+<title>bestel</title>
 <link href="<c:url value="/resources/form.css" />" rel="stylesheet"
 	type="text/css" />
 
@@ -15,11 +15,23 @@
 	Hallo bedankt voor uw interesse in ons product! Graag dit formulier
 	volledig invullen.
 	<br>
-
-	<h3>Form</h3>
-
+	<div id="formsContent">
+		<h2>Forms</h2>
+		
+		<form:form id="form" method="post" modelAttribute="Bestelling" cssClass="cleanform">
+			<div class="header">
+		  		<h2>Form</h2>
+		  		<c:if test="${not empty message}">
+					<div id="message" class="success">${message}</div>	
+		  		</c:if>
+		  		<s:bind path="*">
+		  			<c:if test="${status.error}">
+				  		<div id="message" class="error">Form has errors</div>
+		  			</c:if>
+		  		</s:bind>
+			</div>
 	<fieldset>
-		<form:form method="post" id="form" modelAttribute="Bestelling" cssClass="cleanform">
+		
 			<legend>Personal Info</legend>
 			<form:label path="name">
 			</form:label>
@@ -35,9 +47,10 @@
 			<br>
 
 			<input type="submit">
-		</form:form>
 	</fieldset>
+		</form:form>
+		</div>
 
-	${Message}
+
 </body>
 </html>

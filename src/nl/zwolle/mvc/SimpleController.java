@@ -27,21 +27,20 @@ public class SimpleController {
 		return new Bestelling();
 	}
 	
-
 	@RequestMapping(value="/bestel", method=RequestMethod.POST)
 	public String nieuweBestelling(String name, int age, @Valid Bestelling bestelling, BindingResult result, Model model) {
 	String message;
 	if (result.hasErrors()){
-		message="Form contains errors";
-		model.addAttribute("message", message);
 	return null;
 	}
+	
 	message = "Form submitted successfully";
 	model.addAttribute("message", message);
 	DataAccesObject.create(name, age);
 	return "redirect:/bestel";
 	}
 
+	
 	@RequestMapping("/overzicht")
 	public String overzicht(Model model) {
 		model.addAttribute("JavaBeans", DataAccesObject.all());
