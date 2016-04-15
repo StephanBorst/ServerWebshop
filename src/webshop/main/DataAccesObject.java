@@ -15,11 +15,11 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 	/**
 	 * Maak een nieuwe bestelling aan en sla die op in de database
 	 */
-	public static Bestelling create(String name, int age){
+	public static Bestelling create(String name, int age, String destination){
 		Bestelling bean = new Bestelling();
 		bean.setName(name);
 		bean.setAge(age);
-		
+		bean.setDestination(destination);
 		
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
