@@ -8,18 +8,19 @@
 <head>
 
 <title>Overview Tickets</title>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
-<body>
+<body class ="body">
 
-<header>
+<header id="head">
 		<h2> Overview of your orders at Borst Airlines</h2>
 		
 		</header>
 		
-		<article>
+		<article id = "Overview">
 		<p> Here is an overview of your orders you can inspect and remove them.
 		
-		<img src="resources\Fleet.jpg">
+		<img id="fleet" src="resources\Fleet.jpg">
 		
 	<ul>
 		<c:forEach items="${Bestellingen}" var="Bestelling">
@@ -30,8 +31,39 @@
 		</c:forEach>
 	</ul>
 	
-	<a class="button" href="http://localhost:8080/webshop" >Back to Home</a>
+	<a class="button" id = "left" href="../webshop" >Back to Home</a>
+	<a class="button" id = "right" href="../webshop/payment" >Confirm Payment</a>
 	</article>
-	
+		<script>
+		$(document).ready(function() {
+		
+			var counter = 0;
+		
+		function bcolor(el) {
+		
+			if($(el).css('color') =='rgb(0, 0, 0)'){
+			$(el).css('color', 'green');
+			}
+			else if($(el).css('color') =='rgb(0, 128, 0)'){
+			$(el).css('color', 'red');
+			}
+			else if($(el).css('color') =='rgb(255, 0, 0)'){
+			$(el).css('color', 'blue');
+			}
+			else if($(el).css('color') =='rgb(0, 0, 255)'){
+			$(el).css('color', 'yellow');
+			}
+			else{$(el).css('color', 'black');}
+		}
+		
+		function makenewcolorfunction(){
+				return function() {bcolor(this)};
+		}
+		
+		$('#head').click(makenewcolorfunction());
+		$('#Overview').click(makenewcolorfunction());
+		
+		});
+		</script>
 </body>
 </html>

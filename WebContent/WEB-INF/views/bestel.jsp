@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="s" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ page session="false" %>
-<c:if test="${!ajaxRequest}">
+
 <html>
 <head>
 	<title>forms</title>
@@ -10,7 +10,7 @@
 	<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
 </head>
 <body>
-</c:if>
+
 	<div id="formsContent">
 		<h2>Forms</h2>
 		
@@ -31,35 +31,28 @@
 		  		<form:label path="name">
 		  			Name <form:errors path="name" cssClass="error" />
 		 		</form:label>
-		  		<form:input path="name" />
+		  		<form:input path="name" id ="name" />
 	
 		  		<form:label path="age">
-		  			Age <form:errors path="age" cssClass="error" />
+		  			Age <form:errors path="age" cssClass="error"/>
 		 		</form:label>
-		  		<form:input path="age" />
+		  		<form:input path="age" id ="age"/>
 		  		
-		  		<form:select path= "destination">
+		  		<form:select path= "destination" id="destiny">
 				<form:option value = "Rivendel">Rivendel</form:option>
 				<form:option value = "Coruscant">Coruscant</form:option>
 				<form:option value = "Gotham">Gotham</form:option>
 				</form:select>
 		  		</fieldset>
-	
-			<p><button type="submit">Submit</button></p>
+			<a class="button" href="../webshop" >Cancel Order</a>
+			<a class="button" href="../webshop/overview" >CheckOut</a>
+			
+			<p><button type="submit" id="plus_btn">Submit</button>
+			<input type="button" value="refresh" id="refresh_btn">
+			</p>
 		</form:form>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#form").submit(function() {  
-					$.post($(this).attr("action"), $(this).serialize(), function(html) {
-						$("#formsContent").replaceWith(html);
-						$('html, body').animate({ scrollTop: $("#message").offset().top }, 500);
-					});
-					return false;  
-				});			
-			});
-		</script>
-	</div>
-<c:if test="${!ajaxRequest}">
+		</div>
+
+
 </body>
 </html>
-</c:if>

@@ -27,10 +27,22 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 		em.persist(bean);
 		t.commit();
 		em.close();
-		
+		System.out.println(bean.getId());
 		return bean;
 	}
 	
+	public static List<Bestelling> all(){
+		EntityManager em = emf.createEntityManager();
+		EntityTransaction t = em.getTransaction();
+		t.begin();
+		List<Bestelling> beans = em.createQuery("from Bestelling", Bestelling.class).getResultList();
+		t.commit();
+		em.close();
+		for(Bestelling a:beans){
+			System.out.println(a.getId());
+		}
+		return beans;
+	}
 	/**
 	 * Verwijder een bestelling uit de database
 	 */
@@ -62,14 +74,6 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 	/**
 	 * Haal alle bestellingen op uit de database
 	 */
-	public static List<Bestelling> all(){
-		EntityManager em = emf.createEntityManager();
-		EntityTransaction t = em.getTransaction();
-		t.begin();
-		List<Bestelling> beans = em.createQuery("from Bestelling", Bestelling.class).getResultList();
-		t.commit();
-		em.close();
-		return beans;
-	}
+
 }
 

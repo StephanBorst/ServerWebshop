@@ -16,7 +16,7 @@
 	</header>
 
 	<div>
-		<p>
+		<p>ID: ${bestelling.id}<br>
 			Naam: ${bestelling.name}<br> Leeftijd: ${bestelling.age}<br>
 			Destination: ${bestelling.destination}<br>
 		</p>
@@ -51,7 +51,7 @@
 		</c:when>
 	</c:choose>
 
-	<a class="button" href="http://localhost:8080/webshop">Back to
+	<a class="button" href="../overview">Back to
 		Overview</a>
 
 </body>

@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Bestelling {
 
 	
-	@NotEmpty(message="This field cannot be empty")
+	@NotEmpty(message = "dit klopt helemaal niet")
 	private String name;
 		
 	@Min(21)

@@ -12,8 +12,8 @@
 	type="text/css" />
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
-<body>
-	<header>
+<body class="body">
+	<header id = head>
 		<h2>
 			Welcome to Dream Airlines<br> Are You Ready for an Adventure?
 		</h2>
@@ -35,11 +35,11 @@
 		<p>Action List
 		<ul>
 			<li>
-				<form method="get" action="http://localhost:8080/webshop/form">
+				<form method="get" action="form">
 					<button type="submit">Order Ticket</button>
 				</form>
 			<li><a class="button"
-				href="http://localhost:8080/webshop/overview">Overview Tickets</a>
+				href="overview">Overview Tickets</a>
 		</ul>
 	</nav>
 	<script>
@@ -47,25 +47,35 @@
 		
 			var counter = 0;
 		
-		function ccolor(el, color) {
-			
-			counter++;
-			if(counter % 2 ==0)
-			$(el).css('color', "black");
-			else
-			$(el).css('color', color);
+		function ccolor(el) {
+		
+			if($(el).css('color') =='rgb(0, 0, 0)'){
+			$(el).css('color', 'green');
+			}
+			else if($(el).css('color') =='rgb(0, 128, 0)'){
+			$(el).css('color', 'red');
+			}
+			else if($(el).css('color') =='rgb(255, 0, 0)'){
+			$(el).css('color', 'blue');
+			}
+			else if($(el).css('color') =='rgb(0, 0, 255)'){
+			$(el).css('color', 'yellow');
+			}
+			else{$(el).css('color', 'black');}
 		}
 		
-		function makenewcolorfunction(color){
-				return function() {ccolor(this, color)};
+		function makenewcolorfunction(){
+				return function() {ccolor(this)};
 		}
 
-		$('article').click(makenewcolorfunction("green"));
-			
+		$('article').click(makenewcolorfunction());
+		$('header').click(makenewcolorfunction());
+		$('footer').click(makenewcolorfunction());
+		$('nav').click(makenewcolorfunction());
 		});
 	</script>
 	<footer>
-		<p>Author: Stephan Borst, Date: April 14th, 2016
+		<p>Author: Stephan Borst, Date: April 26th, 2016
 	</footer>
 </body>
 </html>
