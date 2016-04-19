@@ -19,6 +19,8 @@
 		<p>ID: ${bestelling.id}<br>
 			Naam: ${bestelling.name}<br> Leeftijd: ${bestelling.age}<br>
 			Destination: ${bestelling.destination}<br>
+			Type of trip: ${bestelling.retour}<br>
+			Price: ${bestelling.prijs} euro<br>
 		</p>
 	</div>
 	<c:choose>

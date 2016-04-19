@@ -7,6 +7,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import webshop.Calculations.PrijsBerekening;
+
 
 public abstract class DataAccesObject {
 
@@ -15,19 +17,21 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 	/**
 	 * Maak een nieuwe bestelling aan en sla die op in de database
 	 */
-	public static Bestelling create(String name, int age, String destination){
+	public static Bestelling create(String name, int age, String destination, String retour){
 		Bestelling bean = new Bestelling();
+		PrijsBerekening prijs = new PrijsBerekening();
+		prijs.setPrijs(destination, retour);
 		bean.setName(name);
 		bean.setAge(age);
 		bean.setDestination(destination);
-		
+		bean.setRetour(retour);
+		bean.setPrijs(prijs.getPrijs());
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
 		em.persist(bean);
 		t.commit();
 		em.close();
-		System.out.println(bean.getId());
 		return bean;
 	}
 	

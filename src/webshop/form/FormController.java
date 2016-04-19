@@ -1,9 +1,5 @@
 package webshop.form;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -12,8 +8,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import webshop.main.Bestelling;
@@ -34,17 +28,19 @@ public class FormController {
 		return "bestel";
 	}
 
+	
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit(@Valid Bestelling bestelling, BindingResult result, Model model, String name, int age, String destination) {
+	public String processSubmit(@ModelAttribute("Bestelling") @Valid Bestelling bestelling, BindingResult result, Model model, String name, int age, String destination, String retour) {
 		if (result.hasErrors()) {
+			System.out.println("form has errors");
 			return "bestel";
 		}
 		
-		Bestelling bestellingobject = DataAccesObject.create(name, age, destination);
+		Bestelling bestellingobject = DataAccesObject.create(name, age, destination, retour);
 		String message = "Form submitted successfully!" + bestellingobject;
 		
 		model.addAttribute("message", message);
 		return "bestel";
 	}
-
+	 
 }

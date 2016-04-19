@@ -11,7 +11,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Bestelling {
 
 	
-	@NotEmpty(message = "dit klopt helemaal niet")
+	@NotEmpty
 	private String name;
 		
 	@Min(21)
@@ -21,7 +21,26 @@ public class Bestelling {
 	
 	private Long id;
 
+	private int prijs;
 	
+	private String retour;
+	
+	public int getPrijs() {
+		return prijs;
+	}
+
+	public void setPrijs(int prijs) {
+		this.prijs = prijs;
+	}
+
+	public String getRetour() {
+		return retour;
+	}
+
+	public void setRetour(String retour) {
+		this.retour = retour;
+	}
+
 	@Id
 	@GeneratedValue(generator="increment")
 	@GenericGenerator(name="increment", strategy = "increment")
@@ -59,7 +78,7 @@ public class Bestelling {
 
 	@Override
 	public String toString() {
-		return id + ": [name= " + name + ", age= " + age + ", destination= " + destination +"]";
+		return id + ": [name= " + name + ", age= " + age + ", destination= " + destination + ", Type of trip= " + retour + ", Price = " + prijs + "]";
 	}
 	
 

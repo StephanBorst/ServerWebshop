@@ -5,18 +5,19 @@
 
 <html>
 <head>
+
 	<title>forms</title>
 	<link href="<c:url value="/resources/form.css" />" rel="stylesheet"  type="text/css" />		
-	<script type="text/javascript" src="<c:url value="/resources/jquery/1.6/jquery.js" />"></script>
+	
 </head>
-<body>
+<body background = "resources/Sky.jpg">
 
 	<div id="formsContent">
-		<h2>Forms</h2>
+		<h2>Booking</h2>
 		
 		<form:form id="form" method="post" modelAttribute="Bestelling" cssClass="cleanform">
 			<div class="header">
-		  		<h2>Form</h2>
+		  		<h2>Please fill in the complete form</h2>
 		  		<c:if test="${not empty message}">
 					<div id="message" class="success">${message}</div>	
 		  		</c:if>
@@ -43,12 +44,16 @@
 				<form:option value = "Coruscant">Coruscant</form:option>
 				<form:option value = "Gotham">Gotham</form:option>
 				</form:select>
+				<form:select path= "retour">
+				<form:option value = "Single">Single Trip</form:option>
+				<form:option value = "Retour">Retour Trip</form:option>
+				</form:select>
+				
 		  		</fieldset>
 			<a class="button" href="../webshop" >Cancel Order</a>
-			<a class="button" href="../webshop/overview" >CheckOut</a>
+			<a class="button" style = "float: right" href="../webshop/overview" >CheckOut</a>
 			
-			<p><button type="submit" id="plus_btn">Submit</button>
-			<input type="button" value="refresh" id="refresh_btn">
+			<p><button type="submit" style = "float: right" id="plus_btn">Submit</button>
 			</p>
 		</form:form>
 		</div>

@@ -65,6 +65,7 @@ public class SimpleController {
 		DataAccesObject.remove(key);
 		return "redirect:/overview";
 	}
+	
 	@RequestMapping("/payment")
 	public String pay(Model model) {
 		return "pay";
