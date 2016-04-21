@@ -1,5 +1,7 @@
 package webshop.form;
 
+import java.util.Date;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -30,17 +32,23 @@ public class FormController {
 
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit(@ModelAttribute("Bestelling") @Valid Bestelling bestelling, BindingResult result, Model model, String name, int age, String destination, String retour) {
+	public String processSubmit( @ModelAttribute("Bestelling") @Valid Bestelling bestelling , BindingResult result, Model model, String name, int age, String destination, String retour, Date date, Date retourdate, int seats, boolean member) {
 		if (result.hasErrors()) {
 			System.out.println("form has errors");
 			return "bestel";
 		}
+		Bestelling bestellingobject;
+		if(retour.equals("Retour")){
+		bestellingobject = DataAccesObject.create(name, age, destination, retour, date, retourdate, seats, member);
+		}
+		else{bestellingobject = DataAccesObject.create(name, age, destination, retour, date, null, seats, member);
+		}
+			
 		
-		Bestelling bestellingobject = DataAccesObject.create(name, age, destination, retour);
 		String message = "Form submitted successfully!" + bestellingobject;
 		
 		model.addAttribute("message", message);
-		return "bestel";
+		return "redirect:/overview";
 	}
 	 
 }

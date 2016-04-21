@@ -1,6 +1,12 @@
 @CHARSET "ISO-8859-1";
 
-
+		#prijs{
+		border: solid 1px #fff;
+		}
+		
+		#travel{
+		border: solid 1px #fff;
+		}
 		.button{
     	display:inline-block;
     	border: solid 1px #333;
@@ -12,7 +18,7 @@
 		}
 		
 		.button:hover{
-		border: solid 1px #CCC;
+		border: solid 1px #ffffff;
     	background: red;
     	color: #CCC;
     	}

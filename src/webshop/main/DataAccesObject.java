@@ -1,5 +1,6 @@
 package webshop.main;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -17,15 +18,23 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 	/**
 	 * Maak een nieuwe bestelling aan en sla die op in de database
 	 */
-	public static Bestelling create(String name, int age, String destination, String retour){
+	public static Bestelling create(String name, int age, String destination, String retour, Date date, Date retourdate, int seats, boolean member){
 		Bestelling bean = new Bestelling();
 		PrijsBerekening prijs = new PrijsBerekening();
-		prijs.setPrijs(destination, retour);
+		prijs.setPrijsPerEenheid(destination, retour);
+		prijs.setKorting(member, prijs.getPrijsPerEenheid());
+		prijs.setTotaalprijs(prijs.getPrijsPerEenheid(), prijs.getKorting(), seats);
 		bean.setName(name);
 		bean.setAge(age);
 		bean.setDestination(destination);
 		bean.setRetour(retour);
-		bean.setPrijs(prijs.getPrijs());
+		bean.setRetourdate(retourdate);
+		bean.setDate(date);
+		bean.setSeats(seats);
+		bean.setMember(member);
+		bean.setPricePerUnit(prijs.getPrijsPerEenheid());
+		bean.setSavings(prijs.getKorting());
+		
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
 		t.begin();
@@ -42,9 +51,6 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 		List<Bestelling> beans = em.createQuery("from Bestelling", Bestelling.class).getResultList();
 		t.commit();
 		em.close();
-		for(Bestelling a:beans){
-			System.out.println(a.getId());
-		}
 		return beans;
 	}
 	/**

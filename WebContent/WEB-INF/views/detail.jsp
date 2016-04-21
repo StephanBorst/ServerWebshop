@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -11,17 +12,36 @@
 </head>
 <body>
 
-	<header>
-	<h2>Dit is een Overzicht van uw Bestelling</h2>
-	</header>
 
-	<div>
+	<div id ="travel">
+		<h3> Travel Information</h3>
 		<p>ID: ${bestelling.id}<br>
 			Naam: ${bestelling.name}<br> Leeftijd: ${bestelling.age}<br>
 			Destination: ${bestelling.destination}<br>
 			Type of trip: ${bestelling.retour}<br>
-			Price: ${bestelling.prijs} euro<br>
+			Departure Date: <fmt:formatDate type="date" value= "${bestelling.date}" /> <br>
+			<c:if test="${bestelling.retour == 'Retour'}">
+			Retour Date: <fmt:formatDate type="date" value= "${bestelling.retourdate}" /> <br>
+			</c:if>
+			<c:choose>
+			<c:when test="${bestelling.member == true}">
+			Member: Yes  	 <br>
+			</c:when>
+			<c:when test="${bestelling.member == false}">
+			Member: No     	 <br>
+			</c:when>
+			</c:choose>
+			
 		</p>
+	</div>
+	<div id="prijs">
+		<h3> Price Information</h3>
+		<p>	Price Per Unit: ${bestelling.pricePerUnit} euro<br>
+			Savings: ${bestelling.savings} euro<br>
+			New Price Per Unit: ${bestelling.pricePerUnit - bestelling.savings}<br>
+			Number of seats: ${bestelling.seats}<br>
+			Total Price: ${bestelling.priceTotal}<br>
+	
 	</div>
 	<c:choose>
 		<c:when test="${bestelling.destination == 'Rivendel' }">
