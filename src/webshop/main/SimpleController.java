@@ -18,6 +18,13 @@ public class SimpleController {
 		return "home";
 	}
 	
+	@RequestMapping("/test")
+	public String test(Model model) {
+		Product product1 = ProductDAO.create("Coruscant", 500);
+		Product product2 = ProductDAO.create("Gotham", 300);
+		Product product3 = ProductDAO.create("Rivendel", 30);
+		return "redirect:/";
+	}
 
 	@ModelAttribute("Bestelling")
 	public Bestelling createFormBean() {

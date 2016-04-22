@@ -87,7 +87,7 @@
 				<form:label path="seats">
 		  			Number of seats <form:errors path="seats" cssClass="error" />
 				</form:label>
-				<form:input path="seats" id="seats" />
+				<form:input path="seats" id="seats"/>
 
 
 				<fieldset class="radio">

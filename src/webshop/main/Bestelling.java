@@ -1,6 +1,5 @@
 package webshop.main;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -12,56 +11,54 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.format.annotation.NumberFormat;
 import org.springframework.format.annotation.NumberFormat.Style;
 
-
 @Entity
 public class Bestelling {
-
 	
+
+
 	@NotEmpty
 	private String name;
-		
+	
+	@Min(1)
+	@Max(10)
+	private int seats;
+	
+	
+	
 	@Min(21)
 	@Max(130)
 	@NumberFormat(style = Style.NUMBER)
 	private int age;
 	
-	@Min(1)
-	private int seats;
-	
-	
-	
 	@Future
 	private Date date;
-	
+
 	private Date retourdate;
-	
+
 	private String destination;
-	
+
 	private String retour;
-	
+
 	private boolean member;
 
 	private int priceTotal;
-	
+
 	private int pricePerUnit;
-	
+
 	private int savings;
-	
 
 	private Long id;
-	
+
 	@Id
-	@GeneratedValue(generator="increment")
-	@GenericGenerator(name="increment", strategy = "increment")
+	@GeneratedValue(generator = "increment")
+	@GenericGenerator(name = "increment", strategy = "increment")
 	public Long getId() {
-	    return id;
+		return id;
 	}
-		
+
 	public Date getDate() {
 		return date;
 	}
@@ -69,7 +66,7 @@ public class Bestelling {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
+
 	public Date getRetourdate() {
 		return retourdate;
 	}
@@ -77,11 +74,11 @@ public class Bestelling {
 	public void setRetourdate(Date retourdate) {
 		this.retourdate = retourdate;
 	}
-	
+
 	public void setid(Long id) {
 		this.id = id;
 	}
-	
+
 	public int getSeats() {
 		return seats;
 	}
@@ -89,7 +86,6 @@ public class Bestelling {
 	public void setSeats(int seats) {
 		this.seats = seats;
 	}
-
 
 	public int getPriceTotal() {
 		return priceTotal;
@@ -123,7 +119,6 @@ public class Bestelling {
 		this.retour = retour;
 	}
 
-	
 	public String getName() {
 		return name;
 	}
@@ -131,7 +126,7 @@ public class Bestelling {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public int getAge() {
 		return age;
 	}
@@ -148,7 +143,6 @@ public class Bestelling {
 		this.destination = destination;
 	}
 
-
 	public boolean isMember() {
 		return member;
 	}
@@ -156,6 +150,8 @@ public class Bestelling {
 	public void setMember(boolean member) {
 		this.member = member;
 	}
+
+
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -172,5 +168,4 @@ public class Bestelling {
 		return sb.toString();
 	}
 
-	
 }
