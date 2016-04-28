@@ -20,9 +20,10 @@ public class SimpleController {
 	
 	@RequestMapping("/test")
 	public String test(Model model) {
-		Product product1 = ProductDAO.create("Coruscant", 500);
-		Product product2 = ProductDAO.create("Gotham", 300);
-		Product product3 = ProductDAO.create("Rivendel", 30);
+		ProductDAO.create("Rivendel", 30);
+		ProductDAO.create("Coruscant", 200);
+		ProductDAO.create("Gotham", 100);
+		ProductDAO.create("Wonderland", 50);
 		return "redirect:/";
 	}
 

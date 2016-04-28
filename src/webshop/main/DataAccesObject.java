@@ -14,10 +14,7 @@ import webshop.Calculations.PrijsBerekening;
 public abstract class DataAccesObject {
 
 private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("webshop");
-	
-	/**
-	 * Maak een nieuwe bestelling aan en sla die op in de database
-	 */
+		
 	public static Bestelling create(String name, int age, String destination, String retour, Date date, Date retourdate, int seats, boolean member){
 		Bestelling bean = new Bestelling();
 		PrijsBerekening prijs = new PrijsBerekening();
@@ -34,6 +31,7 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 		bean.setMember(member);
 		bean.setPricePerUnit(prijs.getPrijsPerEenheid());
 		bean.setSavings(prijs.getKorting());
+		bean.setPriceTotal(prijs.getTotaalprijs());
 		
 		EntityManager em = emf.createEntityManager();
 		EntityTransaction t = em.getTransaction();
@@ -53,6 +51,9 @@ private static EntityManagerFactory emf = Persistence.createEntityManagerFactory
 		em.close();
 		return beans;
 	}
+	
+	
+	
 	/**
 	 * Verwijder een bestelling uit de database
 	 */

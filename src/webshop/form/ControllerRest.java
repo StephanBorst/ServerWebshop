@@ -19,17 +19,8 @@ public class ControllerRest {
 	public List<Bestelling> ritten() {
 		return DataAccesObject.all();
 	}
-
-	/* Werkt niet moet met Ajax
-	@RequestMapping(method = RequestMethod.POST)
-	public Bestelling create(Bestelling b) {
-		System.out.println("Deze functie wordt succesvol aangeroepen");
-		Bestelling newb = DataAccesObject.create(b.getName(), b.getAge(),
-				b.getDestination());
-		return newb;
-	}
-	*/
 	
+
 	@RequestMapping(value="{id}", method=RequestMethod.GET)
 	public Bestelling bestel(@PathVariable String id){
 		Long key;
@@ -37,14 +28,32 @@ public class ControllerRest {
 			key = Long.valueOf(id);
 		}
 		catch(NumberFormatException e){
-			// id is geen getal? error 404
 			return null;
 		}
 		Bestelling b = DataAccesObject.find(key);
 		if(b == null){
-			// geen rit met gegeven id? error 404
 			return null;
 		} 
+
 		return b;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+/* Werkt niet moet met Ajax
+@RequestMapping(method = RequestMethod.POST)
+public Bestelling create(Bestelling b) {
+	System.out.println("Deze functie wordt succesvol aangeroepen");
+	Bestelling newb = DataAccesObject.create(b.getName(), b.getAge(),
+			b.getDestination());
+	return newb;
+}
+*/

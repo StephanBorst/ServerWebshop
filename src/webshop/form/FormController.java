@@ -1,15 +1,16 @@
 package webshop.form;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -32,57 +33,87 @@ public class FormController {
 		return new Bestelling();
 	}
 
+	public void showStock(Model model) {
+		Product p1 = ProductDAO.find((long) 1);
+		int stock1 = p1.getStock();
+		Product p2 = ProductDAO.find((long) 2);
+		int stock2 = p2.getStock();
+		Product p3 = ProductDAO.find((long) 3);
+		int stock3 = p3.getStock();
+		Product p4 = ProductDAO.find((long) 4);
+		int stock4 = p4.getStock();
+		model.addAttribute("stock1", stock1);
+		model.addAttribute("stock2", stock2);
+		model.addAttribute("stock3", stock3);
+		model.addAttribute("stock4", stock4);
+	}
+
 	@RequestMapping(method = RequestMethod.GET)
-	public String form() {
+	public String form(Model model) {
+		showStock(model);
 		return "bestel";
 	}
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-	    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
-	    sdf.setLenient(true);
-	    binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
-	}
-	
 	@RequestMapping(method = RequestMethod.POST)
-	public String processSubmit( @ModelAttribute("Bestelling") @Valid Bestelling bestelling , BindingResult result, String name, int age, String destination, String retour, Date date, Date retourdate, int seats, boolean member) {
-	
+	public String processSubmit(@ModelAttribute("Bestelling") @Valid Bestelling bestelling, BindingResult result,
+			Model model, String name, int age, String destination, String retour, Date date, Date retourdate, int seats,
+			boolean member) {
+
 		if (result.hasErrors()) {
-			System.out.println("form has errors");
+			showStock(model);
 			return "bestel";
 		}
-		Bestelling bestellingobject;
-		
-		if(retour.equals("Retour")){
-		bestellingobject = DataAccesObject.create(name, age, destination, retour, date, retourdate, seats, member);
+		try {
+			if (retourdate.before(date)) {
+				showStock(model);
+				String message = "Retour date must be after Departure date!";
+				model.addAttribute("message", message);
+				return "bestel";
+			}
+		} catch (Exception e) {
 		}
-		else{bestellingobject = DataAccesObject.create(name, age, destination, retour, date, null, seats, member);
-		}
-		
-		switch (destination) {
-		case "Coruscant":
-			Product p1 = ProductDAO.find((long) 1);
-			p1.setStock(p1.getStock()-seats);
-			ProductDAO.update(p1);
-			break;
+		try {
+			switch (destination) {
+			case "Rivendel":
+				Product p1 = ProductDAO.find((long) 1);
+				p1.setStock(p1.getStock() - seats);
+				ProductDAO.update(p1);
+				break;
+			case "Coruscant":
+				Product p2 = ProductDAO.find((long) 2);
+				p2.setStock(p2.getStock() - seats);
+				ProductDAO.update(p2);
+				break;
+			case "Gotham":
+				Product p3 = ProductDAO.find((long) 3);
+				p3.setStock(p3.getStock() - seats);
+				ProductDAO.update(p3);
+				break;
+			case "Wonderland":
+				Product p4 = ProductDAO.find((long) 4);
+				p4.setStock(p4.getStock() - seats);
+				ProductDAO.update(p4);
+				break;
+			}
 			
-		case "Gotham":
-			Product p2 = ProductDAO.find((long) 2);
-			p2.setStock(p2.getStock()-seats);
-			ProductDAO.update(p2);
-			break;
-		case "Rivendel":
-			Product p3 = ProductDAO.find((long) 3);
-			p3.setStock(p3.getStock()-seats);
-			ProductDAO.update(p3);
-			break;
-			
-		default: assert false: "dit kan echt niet";
-		break;
+		} catch (Exception e) {
+			String message = "Not enough seats available";
+			model.addAttribute("message", message);
+			showStock(model);
+			return "bestel";
 		}
-				
-		
+		if (retour.equals("Retour")) {
+			DataAccesObject.create(name, age, destination, retour, date, retourdate, seats, member);
+		} else {
+			DataAccesObject.create(name, age, destination, retour, date, null, seats, member);
+		}
 		return "redirect:/overview";
 	}
-	 
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) throws Exception {
+		SimpleDateFormat sdf = new SimpleDateFormat("d-MM-yy");
+		sdf.setLenient(true);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
+	}
 }

@@ -38,40 +38,6 @@
 
 	var Confirm = new CustomConfirm();
 </script>
-</head>
-<body class="body">
-	<div id="dialogoverlay"></div>
-	<div id="dialogbox">
-		<div>
-			<div id="dialogboxhead">Confirm that action</div>
-			<div id="dialogboxbody">You sure you wanna delete order?</div>
-			<div id="dialogboxfoot"><button onclick = "Confirm.yes()">Yes</button> <button onclick = "Confirm.no()">No</button></div>
-		</div>
-	</div>
-	<header id="head">
-		<h2>Overview of your orders at Borst Airlines</h2>
-
-	</header>
-
-	<article id="Overview">
-		<p>
-			Here is an overview of your orders you can inspect and remove them. <img
-				id="fleet" src="resources\Fleet.jpg">
-		<ul>
-			<c:forEach items="${Bestellingen}" var="Bestelling">
-				<li>Bestelling ${Bestelling.id}: <a
-					href="<c:url value="/bestelling/${Bestelling.id}" />">Show
-						Details</a>, <button onclick="Confirm.render(${Bestelling.id})">Delete</button>
-				</li>
-			</c:forEach>
-		</ul>
-		
-		<a class="button" id="left" href="../webshop">Back to Home</a> <a
-			class="button" id="right" href="../webshop/payment">Confirm
-			Payment</a>
-	</article>
-	<p id="demo"></p>
-
 	<script>
 		$(document).ready(function() {
 
@@ -103,5 +69,43 @@
 
 		});
 	</script>
+</head>
+<body class="body">
+	<div id="dialogoverlay"></div>
+	<div id="dialogbox">
+		<div>
+			<div id="dialogboxhead">Confirm that action</div>
+			<div id="dialogboxbody">You sure you wanna delete order?</div>
+			<div id="dialogboxfoot"><button onclick = "Confirm.yes()">Yes</button> <button onclick = "Confirm.no()">No</button></div>
+		</div>
+	</div>
+	<header id="head">
+		<h2>Overview of your orders at Borst Airlines</h2>
+
+	</header>
+
+	<article id="Overview">
+		<p>
+			Here is an overview of your orders you can inspect and remove them. <img
+				id="fleet" src="resources\Fleet.jpg">
+		<ul>
+			
+			<c:forEach items="${Bestellingen}" var="Bestelling">
+				<li>Bestelling ${Bestelling.id}: <a
+					href="<c:url value="/bestelling/${Bestelling.id}" />">Show Details</a>, 
+					
+					<button onclick="Confirm.render(${Bestelling.id})">Delete</button>
+			
+				</li>
+			</c:forEach>
+		</ul>
+		
+		<a class="button" id="left" href="../webshop">Back to Home</a> <a
+			class="button" id="right" href="../webshop/payment">Confirm
+			Payment</a>
+	</article>
+	<p id="demo"></p>
+
+
 </body>
 </html>

@@ -14,11 +14,14 @@
   
   <script src="//code.jquery.com/jquery-1.10.2.js"></script>
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
 <script>
 	$(function() {
-		$(".datepicker").datepicker();
+		$(".datepicker").datepicker({dateFormat: "d-mm-yy"});
 	});
 </script>
+
+
 <script>
 	$(document).ready(function(){
 	    $("#dropdown").change(function(){
@@ -28,8 +31,10 @@
 	    });
 	});
 	</script>
+
+
 </head>
-<body background="resources/Sky.jpg">
+<body>
 
 	<div id="formsContent">
 		<h2>Booking</h2>
@@ -39,32 +44,38 @@
 			<div class="header">
 				<h2>Please fill in the complete form</h2>
 				<c:if test="${not empty message}">
-					<div id="message" class="success">${message}</div>
+					<div id="message" class="error">${message}</div>
 				</c:if>
 				<s:bind path="*">
 					<c:if test="${status.error}">
-						<div id="message" class="error">Form has errors</div>
+						<div id="message" class="error">${message}</div>
 					</c:if>
 				</s:bind>
 			</div>
 			<fieldset>
+				
+				
 				<legend>Personal Info</legend>
+				
+				
 				<form:label path="name">
 		  			Name <form:errors path="name" cssClass="error" />
 				</form:label>
 				<form:input path="name" id="name" />
 
+				
 				<form:label path="age">
 		  			Age <form:errors path="age" cssClass="error" />
 				</form:label>
-				<form:input path="age" id="age" />
+				<form:input type="number" path="age" id="age"  />
 
-				<form:select path="destination" id="destiny">
-					<form:option value="Rivendel">Rivendel (800 eu, excl)</form:option>
-					<form:option value="Coruscant">Coruscant (1000 eu, excl)</form:option>
-					<form:option value="Gotham">Gotham (300 eu, excl)</form:option>
-				</form:select>
 				
+				<form:select path="destination" id="destiny">
+					<form:option value="Rivendel">Rivendel (800 eu, excl) Stock: ${stock1}</form:option>
+					<form:option value="Coruscant">Coruscant (1000 eu, excl) Stock: ${stock2}</form:option>
+					<form:option value="Gotham">Gotham (300 eu, excl) Stock: ${stock3}</form:option>
+					<form:option value="Wonderland">Wonderland (600 eu, excl) Stock: ${stock4}</form:option>
+				</form:select>
 				
 				<form:select path="retour" id="dropdown">
 					<form:option value="Single" >Single Trip</form:option>
@@ -87,7 +98,7 @@
 				<form:label path="seats">
 		  			Number of seats <form:errors path="seats" cssClass="error" />
 				</form:label>
-				<form:input path="seats" id="seats"/>
+				<form:input type="number" path="seats" id="seats"/>
 
 
 				<fieldset class="radio">

@@ -11,31 +11,23 @@ import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.format.annotation.NumberFormat;
-import org.springframework.format.annotation.NumberFormat.Style;
 
 @Entity
 public class Bestelling {
 	
-
-
 	@NotEmpty
 	private String name;
 	
-	@Min(1)
-	@Max(10)
-	private int seats;
-	
-	
-	
 	@Min(21)
 	@Max(130)
-	@NumberFormat(style = Style.NUMBER)
 	private int age;
 	
 	@Future
 	private Date date;
 
+	@Min(1)
+	private int seats;
+	
 	private Date retourdate;
 
 	private String destination;

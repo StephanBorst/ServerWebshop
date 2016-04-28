@@ -37,7 +37,7 @@
 	<div id="prijs">
 		<h3> Price Information</h3>
 		<p>	Price Per Unit: ${bestelling.pricePerUnit} euro<br>
-			Savings: ${bestelling.savings} euro<br>
+			Member Savings: ${bestelling.savings} euro<br>
 			New Price Per Unit: ${bestelling.pricePerUnit - bestelling.savings}<br>
 			Number of seats: ${bestelling.seats}<br>
 			Total Price: ${bestelling.priceTotal}<br>
@@ -71,6 +71,21 @@
 					});
 		</script>
 		</c:when>
+		<c:when test="${bestelling.destination == 'Wonderland' }">
+		<script>
+			$(document).ready(
+					function() {
+						$('body').css('background-image','url(' + "../resources/wonderland.jpg" + ')');
+						$('body').css('background-size', 'cover');
+						$('#travel').css('color', "black");
+						$('#travel').css('text-align', "center");
+						$('#prijs').css('color', "black");
+						$('#prijs').css('text-align', "center");
+					});
+		</script>
+		</c:when>
+		
+		
 	</c:choose>
 
 	<a class="button" href="../overview">Back to

@@ -3,6 +3,7 @@ package webshop.main;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Min;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -11,6 +12,7 @@ public class Product {
 	
 	private String destination;
 	
+	@Min(0)
 	private int stock;
 	
 	public Product() {

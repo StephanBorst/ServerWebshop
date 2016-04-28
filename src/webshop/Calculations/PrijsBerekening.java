@@ -33,6 +33,9 @@ public class PrijsBerekening {
 		case "Rivendel":
 			prijsPerEenheid = 800;
 			break;
+		case "Wonderland":
+			prijsPerEenheid = 600;
+			break;
 		}
 		if (retour.equals("Retour")) {
 			prijsPerEenheid *= 2;

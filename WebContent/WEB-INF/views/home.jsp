@@ -25,9 +25,10 @@
 		<hr>
 		Most popular destinations
 		<ol>
-			<li>Middle Earth
-			<li>Korhal
+			<li>Rivendel
 			<li>Coruscant
+			<li>Gotham
+			<li>Wonderland
 		</ol>
 		<img src="resources\Spaceship.jpg">
 	</article>
@@ -75,7 +76,7 @@
 		});
 	</script>
 	<footer>
-		<p>Author: Stephan Borst, Date: April 26th, 2016
+		<p>Author: Stephan Borst, Date: April 29th, 2016
 	</footer>
 </body>
 </html>
