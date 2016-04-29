@@ -1,13 +1,11 @@
 package webshop.form;
 
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
-import org.springframework.beans.propertyeditors.CustomNumberEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -63,15 +61,14 @@ public class FormController {
 			showStock(model);
 			return "bestel";
 		}
-		try {
-			if (retourdate.before(date)) {
-				showStock(model);
-				String message = "Retour date must be after Departure date!";
-				model.addAttribute("message", message);
-				return "bestel";
-			}
-		} catch (Exception e) {
+		
+		if (retourdate.before(date)) {
+			showStock(model);
+			String message = "Retour date must be after Departure date!";
+			model.addAttribute("message", message);
+			return "bestel";
 		}
+	
 		try {
 			switch (destination) {
 			case "Rivendel":

@@ -48,7 +48,7 @@
 				</c:if>
 				<s:bind path="*">
 					<c:if test="${status.error}">
-						<div id="message" class="error">${message}</div>
+						<div id="message" class="error">Form contains errors</div>
 					</c:if>
 				</s:bind>
 			</div>
